@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "vincle-test": {
+    "hunt-the-wumpus": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/vincle-test",
+            "outputPath": "dist/hunt-the-wumpus",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "vincle-test:build:production"
+              "browserTarget": "hunt-the-wumpus:build:production"
             },
             "development": {
-              "browserTarget": "vincle-test:build:development"
+              "browserTarget": "hunt-the-wumpus:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "vincle-test:build"
+            "browserTarget": "hunt-the-wumpus:build"
           }
         },
         "test": {
@@ -107,5 +107,5 @@
       }
     }
   },
-  "defaultProject": "vincle-test"
+  "defaultProject": "hunt-the-wumpus"
 }
