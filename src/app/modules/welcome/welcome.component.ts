@@ -9,15 +9,15 @@ import { GameParametersService } from 'src/app/services/game-parameters.service'
 })
 export class WelcomeComponent implements OnInit {
 	parametersForm = this.fb.group({
-    	dimensions : ['', Validators.required],
-    	holesCant : ['', Validators.required],
-    	arrowsCant : ['', Validators.required]
-  	})
-  	constructor(
-      private gp: GameParametersService,
-      private fb: FormBuilder) {
+    dimensions : ['', Validators.required],
+    holesCant : ['', Validators.required],
+    arrowsCant : ['', Validators.required],
+  })
 
-    }
+  constructor(
+    private gp: GameParametersService,
+    private fb: FormBuilder,
+  ) {}
 
   ngOnInit(): void {}
 

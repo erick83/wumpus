@@ -14,6 +14,6 @@ export interface IBoxData {
 }
 
 export interface IUserPosition {
-  col:number
-  row:number
+  col: number
+  row: number
 }
