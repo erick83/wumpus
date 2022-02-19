@@ -1,0 +1,17 @@
+<form [formGroup]="parametersForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Tamaño</label>
+    <input type="number" formControlName="dimensions">
+  </div>
+  <div>
+    <label>N° Pozos</label>
+    <input type="number" formControlName="holesCant">
+  </div>
+  <div>
+    <label>N° Flechas</label>
+    <input type="number" formControlName="arrowsCant">
+  </div>
+
+  <button type="submit">Comenzar</button>
+</form>
+
