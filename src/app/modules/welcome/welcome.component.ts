@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { GameParametersService } from 'src/app/services/game-parameters.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class WelcomeComponent implements OnInit {
   constructor(
     private gpService: GameParametersService,
     private fb: FormBuilder,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {}
@@ -24,6 +26,7 @@ export class WelcomeComponent implements OnInit {
   onSubmit() {
     const {dimensions, holesCant, arrowsCant} = this.parametersForm.value
     this.gpService.setParameters(dimensions, holesCant, arrowsCant)
+    this.router.navigateByUrl('game')
   }
 
 }
