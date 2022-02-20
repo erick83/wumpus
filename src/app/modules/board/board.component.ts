@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IBoxData } from 'src/app/models/models.interfaces';
 import { GameParametersService } from 'src/app/services/game-parameters.service';
 
@@ -10,12 +11,20 @@ import { GameParametersService } from 'src/app/services/game-parameters.service'
 export class BoardComponent implements OnInit {
   board: IBoxData[][] | null = null
   maxLen = 0
-  constructor(private gpService: GameParametersService) { }
+
+  constructor(
+    private gpService: GameParametersService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.gpService.board$.subscribe(data => {
-      this.board = data
-      this.maxLen = data?.length || 0
+      if (!data) {
+        this.router.navigateByUrl('')
+      } else {
+        this.board = data
+        this.maxLen = data?.length || 0
+      }
     })
   }
 

@@ -1,5 +1,7 @@
-<ul>
-  <li *ngFor="let row of (board | revert)">
-    {{ row | json }}
-  </li>
-</ul>
+<div>
+  <div *ngFor="let row of (board | revert)" class="row">
+    <div class="col" *ngFor="let col of row">
+      {{ col | json }}
+    </div>
+  </div>
+</div>
