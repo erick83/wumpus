@@ -1,17 +1,33 @@
-<form [formGroup]="parametersForm" (ngSubmit)="onSubmit()">
+<div class="box-form">
   <div>
-    <label>Tamaño</label>
-    <input type="number" formControlName="dimensions">
+    <!-- <img class="hunter-image"src="/assets/images/hunter.png"> -->
+    <img class="wumpus-image"src="/assets/images/monster.png">
   </div>
-  <div>
-    <label>N° Pozos</label>
-    <input type="number" formControlName="holesCant">
-  </div>
-  <div>
-    <label>N° Flechas</label>
-    <input type="number" formControlName="arrowsCant">
-  </div>
-
-  <button type="submit">Comenzar</button>
-</form>
+  <h1 class="game-title">HUNT THE WUMPUS</h1>
+  <form [formGroup]="parametersForm" (ngSubmit)="onSubmit()">
+    <div>
+      <div class="div-control">
+        <label class="label-parameters">Tamaño: </label>
+        <input class="input-parameters" type="number" formControlName="dimensions">
+      </div>
+    </div>
+    <br/>
+    <div>
+      <div class="div-control">
+        <label class="label-parameters">N° Pozos: </label>
+        <input class="input-parameters" type="number" formControlName="holesCant">
+      </div>
+    </div>
+    <br/>
+    <div>
+      <div class="div-control">
+        <label class="label-parameters">N° Flechas: </label>
+        <input class="input-parameters" type="number" formControlName="arrowsCant">
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <button class="start-button" type="submit">Comenzar</button>
+  </form>
+</div>
 

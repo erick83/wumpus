@@ -1,4 +1,4 @@
-<div>
+<div class="box-container">
   <div *ngFor="let row of (board | revert)" class="row">
     <div class="col" *ngFor="let col of row">
       {{ col | json }}
