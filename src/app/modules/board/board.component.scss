@@ -13,8 +13,11 @@
   width: 7rem;
   height: 7rem;
   padding: 0.5rem;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(3rem, 1fr));
 }
-.wumpu-image, .smell-image, .wind-image, .hole-image, .gold-image {
+.hunter-image, .wumpu-image, .smell-image, .wind-image, .hole-image, .gold-image {
   width:3rem;
   margin:auto;
 }
