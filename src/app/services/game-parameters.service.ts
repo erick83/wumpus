@@ -8,10 +8,15 @@ import { IBoxData, IParameters, TBoardCluesTypes } from '../models/models.interf
 })
 export class GameParametersService {
 
-  #parametersSubect = new BehaviorSubject<IParameters|null>(null)
+  #parametersSubect = new BehaviorSubject<IParameters | null>(null)
+  #boardSubject = new BehaviorSubject<IBoxData[][] | null>(null)
 
   get parameter$() {
     return this.#parametersSubect.asObservable()
+  }
+
+  get board$() {
+    return this.#boardSubject.asObservable()
   }
 
   constructor() {
@@ -28,6 +33,7 @@ export class GameParametersService {
 
   private initParameter(params: IParameters) {
     const board  = this.generateBoard(params.dimensions, params.holesCant);
+    this.#boardSubject.next(board);
   }
 
   private generateBoard(dimensions: number, holes: number): IBoxData[][] {
@@ -46,7 +52,7 @@ export class GameParametersService {
       return [...i].map(() => ({...data}))
     })
 
-    let h = holes + 1;
+    let h = holes + 2;
     const acums: string[] = []
 
     while (h > 0) {
@@ -55,6 +61,8 @@ export class GameParametersService {
 
       if (row + col > 2 && !acums.includes(`${row}-${col}`)) {
         if (h === 1) {
+          board[row][col].hasGold = true
+        } else if (h === 2) {
           board[row][col].hasWumpu = true
           this.setClues(board, row, col, 'hasSmell');
         } else {
@@ -66,7 +74,6 @@ export class GameParametersService {
         console.log({ h, row, col });
         h = h - 1
       }
-
 
     }
 

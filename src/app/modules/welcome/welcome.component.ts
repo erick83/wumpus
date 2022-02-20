@@ -15,7 +15,7 @@ export class WelcomeComponent implements OnInit {
   })
 
   constructor(
-    private gp: GameParametersService,
+    private gpService: GameParametersService,
     private fb: FormBuilder,
   ) {}
 
@@ -23,7 +23,7 @@ export class WelcomeComponent implements OnInit {
 
   onSubmit() {
     const {dimensions, holesCant, arrowsCant} = this.parametersForm.value
-    this.gp.setParameters(dimensions, holesCant, arrowsCant)
+    this.gpService.setParameters(dimensions, holesCant, arrowsCant)
   }
 
 }
