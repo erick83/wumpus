@@ -10,4 +10,11 @@
 .col {
   border-left: 1px solid #9f9f9f;
   border-right: 1px solid #9f9f9f;
+  width: 7rem;
+  height: 7rem;
+  padding: 0.5rem;
+}
+.wumpu-image, .smell-image, .wind-image, .hole-image, .gold-image {
+  width:3rem;
+  margin:auto;
 }

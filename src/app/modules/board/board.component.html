@@ -1,7 +1,12 @@
 <div class="box-container">
   <div *ngFor="let row of (board | revert)" class="row">
     <div class="col" *ngFor="let col of row">
-      {{ col | json }}
+      <!-- {{ col | json }} -->
+      <img class="gold-image" src = "/assets/images/gold.png"*ngIf="col.hasGold === true">
+      <img class="hole-image" src = "/assets/images/hole.png"*ngIf="col.hasHole === true">
+      <img class="wumpu-image" src = "/assets/images/monster.png"*ngIf="col.hasWumpu === true">
+      <img class="smell-image" src = "/assets/images/smell.png"*ngIf="col.hasSmell === true && col.hasHole === false && col.hasWumpu === false">
+      <img class="wind-image" src = "/assets/images/wind.png"*ngIf="col.hasWind === true && col.hasHole === false && col.hasWumpu === false">
     </div>
   </div>
 </div>
