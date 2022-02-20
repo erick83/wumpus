@@ -77,7 +77,6 @@ export class GameParametersService {
 
     }
 
-    console.log(board)
     return board;
   }
 
