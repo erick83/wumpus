@@ -9,7 +9,7 @@ import { RevertPipe } from './revert.pipe';
 @NgModule({
   declarations: [
     BoardComponent,
-    RevertPipe
+    RevertPipe,
   ],
   imports: [
     CommonModule,
