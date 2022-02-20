@@ -17,3 +17,5 @@ export interface IUserPosition {
   col: number
   row: number
 }
+
+export type TBoardCluesTypes = 'hasSmell' | 'hasWind'
