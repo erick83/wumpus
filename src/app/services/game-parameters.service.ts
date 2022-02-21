@@ -20,20 +20,18 @@ export class GameParametersService {
   }
 
   constructor() {
-    this.parameter$.subscribe((data) => {
-      if (data) {
-        this.initParameter(data);
-      }
-    })
+    this.parameter$.subscribe(this.initParameter)
   }
 
   setParameters(dimensions:number, holesCant:number, arrowsCant:number) {
     this.#parametersSubect.next({dimensions, holesCant, arrowsCant})
   }
 
-  private initParameter(params: IParameters) {
-    const board  = this.generateBoard(params.dimensions, params.holesCant);
-    this.#boardSubject.next(board);
+  private initParameter(data: IParameters | null) {
+    if (data) {
+      const board  = this.generateBoard(data.dimensions, data.holesCant);
+      this.#boardSubject.next(board);
+    }
   }
 
   private generateBoard(dimensions: number, holes: number): IBoxData[][] {
