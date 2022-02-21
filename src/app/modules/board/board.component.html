@@ -10,4 +10,10 @@
       <img class ="hunter-image" src="/assets/images/hunter.png" *ngIf="showHunter(rowIdx, colIdx)">
     </div>
   </div>
+  <div class="controls">
+    <button class="button-up" (click)="moveHunter('up')">Arriba</button>
+    <button class="button-right" (click)="moveHunter('right')">Derecha</button>
+    <button class="button-down" (click)="moveHunter('down')">Abajo</button>
+    <button class="button-left" (click)="moveHunter('left')">Izquierda</button>
+  </div>
 </div>

@@ -39,12 +39,40 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   showHunter(row:number, col:number ) {
     if (col === this.hunterPosition.col && row === this.hunterPosition.row) {
-      if (this.board && this.board[col] && this.board[col][row]) {
-        this.board[col][row].hasPristine = false
-      }
       return true
     }
     return false
+  }
+
+  moveHunter(evt:string) {
+    console.log(evt, this.hunterPosition)
+    switch (evt) {
+      case 'up':
+        if(this.hunterPosition.row > 0){
+          this.hunterPosition.row = this.hunterPosition.row-1
+        }
+      break;
+      case 'right':
+        if(this.hunterPosition.col < this.maxLen - 1){
+          this.hunterPosition.col = this.hunterPosition.col+1
+        }
+          break;
+      case 'down':
+        if(this.hunterPosition.row < this.maxLen - 1){
+          this.hunterPosition.row = this.hunterPosition.row+1
+        }
+      break;
+      case 'left':
+        if(this.hunterPosition.col > 0){
+          this.hunterPosition.col = this.hunterPosition.col-1
+        }
+      break;
+    default:
+      break;
+   }
+   if (this.board && this.board[this.hunterPosition.row] && this.board[this.hunterPosition.row][this.hunterPosition.col]) {
+    this.board[this.hunterPosition.row][this.hunterPosition.col].hasPristine = false
+    }
   }
 
 }
