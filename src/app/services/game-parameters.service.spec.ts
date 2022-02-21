@@ -16,12 +16,13 @@ describe('GameParametersService', () => {
   })
 
   it('should be set parameters', () => {
-    service.setParameters(1, 1, 1)
+    service.setParameters(4, 2, 1)
 
     service.parameter$.subscribe((data) => {
-      expect(data?.holesCant).toBe(1)
-      expect(data?.dimensions).toBe(1)
+      expect(data?.dimensions).toBe(4)
+      expect(data?.holesCant).toBe(2)
       expect(data?.arrowsCant).toBe(1)
     })
   })
+
 });
