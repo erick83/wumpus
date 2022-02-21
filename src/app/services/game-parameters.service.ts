@@ -41,7 +41,7 @@ export class GameParametersService {
       hasHole: false,
       hasWind: false,
       hasSmell: false,
-      hasPristine: false,
+      hasPristine: true,
     };
 
     const emptyBoard = new Array(dimensions).fill(new Array(dimensions).fill(undefined));
@@ -69,7 +69,6 @@ export class GameParametersService {
         }
 
         acums.push(`${row}-${col}`)
-        console.log({ h, row, col });
         h = h - 1
       }
 
