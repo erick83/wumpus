@@ -11,11 +11,13 @@ import { GameParametersService } from 'src/app/services/game-parameters.service'
 })
 export class BoardComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription()
-  private hunterPosition: IUserPosition = {col: 0, row: 0 }
+  hunterPosition: IUserPosition = {col: 0, row: 0 }
 
   board: IBoxData[][] | null = null
   maxLen = 0
-
+  hadGold = false
+  showAlert = false
+  textAlert = ''
   constructor(
     private gpService: GameParametersService,
     private router: Router
@@ -45,7 +47,11 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   moveHunter(evt:string) {
-    console.log(evt, this.hunterPosition)
+    if (this.hadGold) {
+      if (this.board && this.board[this.hunterPosition.row] && this.board[this.hunterPosition.row][this.hunterPosition.col]) {
+        this.board[this.hunterPosition.row][this.hunterPosition.col].hasGold = false
+      }
+    }
     switch (evt) {
       case 'up':
         if(this.hunterPosition.row > 0){
@@ -70,9 +76,30 @@ export class BoardComponent implements OnInit, OnDestroy {
     default:
       break;
    }
+   let positionActual = null
    if (this.board && this.board[this.hunterPosition.row] && this.board[this.hunterPosition.row][this.hunterPosition.col]) {
-    this.board[this.hunterPosition.row][this.hunterPosition.col].hasPristine = false
+      positionActual = this.board[this.hunterPosition.row][this.hunterPosition.col]
+      positionActual.hasPristine = false
+      if (positionActual?.hasHole === true) {
+        this.textAlert = 'Ha caido en un pozo'
+        this.showAlert = true
+      }
+      if (positionActual?.hasWumpu === true) {
+        this.textAlert = 'Has sido victima del Wumpu'
+        this.showAlert = true
+      }
+      if (positionActual?.hasGold === true) {
+          this.hadGold = positionActual.hasGold = true
+          this.textAlert = 'Has capturado el oro'
+          this.showAlert = true
+      }
+      if (this.hadGold && positionActual.hasPristine === false) {
+        positionActual.hasGold = true
+      }
     }
+  }
+  closeAlert() {
+    this.showAlert = false
   }
 
 }

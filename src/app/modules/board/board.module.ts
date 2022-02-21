@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BoardComponent } from './board.component';
 import { RouterModule } from '@angular/router';
+import { AlertComponent } from '../alert/alert.component';
+import { AlertModule } from '../alert/alert.module';
 
 
 
@@ -11,6 +13,7 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
+    AlertModule,
     RouterModule.forChild([
       {
         path: '',
