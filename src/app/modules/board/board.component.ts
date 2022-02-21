@@ -16,8 +16,13 @@ export class BoardComponent implements OnInit, OnDestroy {
   board: IBoxData[][] | null = null
   maxLen = 0
   hadGold = false
+  gameOver = false
   showAlert = false
+  showModal = false
+  youWin = false
   textAlert = ''
+  textModal = ''
+  numberBullets = 0
   constructor(
     private gpService: GameParametersService,
     private router: Router
@@ -31,6 +36,11 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.board = [...data].reverse()
         this.maxLen = data?.length || 0
         this.hunterPosition = { row: this.maxLen - 1, col: 0 }
+      }
+    })
+    this.gpService.parameter$.subscribe(data => {
+      if(data) {
+        this.numberBullets = data.arrowsCant
       }
     })
   }
@@ -47,6 +57,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   moveHunter(evt:string) {
+    this.showAlert = false
     if (this.hadGold) {
       if (this.board && this.board[this.hunterPosition.row] && this.board[this.hunterPosition.row][this.hunterPosition.col]) {
         this.board[this.hunterPosition.row][this.hunterPosition.col].hasGold = false
@@ -56,21 +67,33 @@ export class BoardComponent implements OnInit, OnDestroy {
       case 'up':
         if(this.hunterPosition.row > 0){
           this.hunterPosition.row = this.hunterPosition.row-1
+        } else {
+          this.textAlert = 'Has chocado con una pared'
+          this.showAlert = true
         }
       break;
       case 'right':
         if(this.hunterPosition.col < this.maxLen - 1){
           this.hunterPosition.col = this.hunterPosition.col+1
+        } else {
+          this.textAlert = 'Has chocado con una pared'
+          this.showAlert = true
         }
           break;
       case 'down':
         if(this.hunterPosition.row < this.maxLen - 1){
           this.hunterPosition.row = this.hunterPosition.row+1
+        } else {
+          this.textAlert = 'Has chocado con una pared'
+          this.showAlert = true
         }
       break;
       case 'left':
         if(this.hunterPosition.col > 0){
           this.hunterPosition.col = this.hunterPosition.col-1
+        } else {
+          this.textAlert = 'Has chocado con una pared'
+          this.showAlert = true
         }
       break;
     default:
@@ -80,13 +103,21 @@ export class BoardComponent implements OnInit, OnDestroy {
    if (this.board && this.board[this.hunterPosition.row] && this.board[this.hunterPosition.row][this.hunterPosition.col]) {
       positionActual = this.board[this.hunterPosition.row][this.hunterPosition.col]
       positionActual.hasPristine = false
+      console.log(this.hunterPosition, positionActual.hasGold)
+      if (this.hunterPosition.row === this.maxLen - 1 && this.hunterPosition.col === 0 && this.hadGold){
+        this.textModal = 'Has ganado el juego'
+        this.youWin = true
+        this.showModal = true
+      }
       if (positionActual?.hasHole === true) {
-        this.textAlert = 'Ha caido en un pozo'
-        this.showAlert = true
+        this.textModal = 'Has caido en un pozo'
+        this.showModal = true
+        this.gameOver = true
       }
       if (positionActual?.hasWumpu === true) {
-        this.textAlert = 'Has sido victima del Wumpu'
-        this.showAlert = true
+        this.textModal = 'Has sido victima del Wumpu'
+        this.showModal = true
+        this.gameOver = true
       }
       if (positionActual?.hasGold === true) {
           this.hadGold = positionActual.hasGold = true
@@ -100,6 +131,13 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
   closeAlert() {
     this.showAlert = false
+    if (this.gameOver || this.youWin) {
+      this.router.navigateByUrl('/')
+    }
+  }
+
+  goToNewGame() {
+    this.router.navigateByUrl('')
   }
 
 }

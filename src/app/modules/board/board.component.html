@@ -1,7 +1,7 @@
 <div class="box-container">
   <div *ngFor="let row of board; index as rowIdx;" class="row">
     <div class="col" *ngFor="let col of row ; index as colIdx">
-      <p>{{ hadGold}}</p>
+      <!-- <p>{{ hadGold}}</p> -->
       <img class ="hunter-image" src="/assets/images/hunter.png" *ngIf="showHunter(rowIdx, colIdx)">
       <img class="gold-image" src="/assets/images/gold.png" *ngIf="col.hasGold && !col.hasPristine">
       <img class="hole-image" src="/assets/images/hole.png" *ngIf="col.hasHole && !col.hasPristine">
@@ -10,12 +10,61 @@
       <img class="wind-image" src="/assets/images/wind.png" *ngIf="col.hasWind  && !col.hasHole && !col.hasWumpu && !col.hasPristine" >
     </div>
   </div>
+  <div class="bullets-controls">
+    <img *ngFor="let b of [].constructor(numberBullets);" class="img-bullets" src="/assets/images/bullet.png">
+  </div>
   <div class="controls">
-    <button class="button-up" (click)="moveHunter('up')"><img class="img-buttons" src="/assets/images/up.png"></button>
-    <button class="button-right" (click)="moveHunter('right')"><img class="img-buttons" src="/assets/images/right.png"></button>
-    <button class="button-down" (click)="moveHunter('down')"><img class="img-buttons" src="/assets/images/down.png"></button>
-    <button class="button-left" (click)="moveHunter('left')"><img class="img-buttons" src="/assets/images/left.png"></button>
+    <button
+      class="button-up"
+      [class.disabled]="gameOver"
+      [disabled]="gameOver"
+      (click)="moveHunter('up')">
+        <img class="img-buttons" src="/assets/images/up.png">
+    </button>
+    <button
+      class="button-right"
+      [class.disabled]="gameOver"
+      [disabled]="gameOver"
+      (click)="moveHunter('right')">
+        <img class="img-buttons" src="/assets/images/right.png">
+      </button>
+      <button
+      class="button-fire"
+      [class.disabled]="gameOver"
+      [disabled]="gameOver"
+      (click)="moveHunter('right')">
+        <img class="img-buttons" src="/assets/images/fire.png">
+      </button>
+    <button
+      class="button-down"
+      [class.disabled]="gameOver"
+      [disabled]="gameOver"
+      (click)="moveHunter('down')">
+        <img class="img-buttons" src="/assets/images/down.png">
+      </button>
+    <button
+      class="button-left"
+      [class.disabled]="gameOver"
+      [disabled]="gameOver"
+      (click)="moveHunter('left')">
+        <img class="img-buttons" src="/assets/images/left.png">
+      </button>
   </div>
 </div>
-
+<div class="modal" *ngIf="showModal">
+  <div class="modal-body">
+    <img
+      class="img-game-over"
+      *ngIf="gameOver"
+      src="/assets/images/gameOver.png">
+      <img
+      class="img-game-over"
+      *ngIf="youWin"
+      src="/assets/images/youWin.png">
+      <h6 class="reason">{{textModal}}</h6>
+      <button
+        class="button-game-over"
+        (click)="goToNewGame()">Nuevo Juego</button>
+  </div>
+</div>
 <app-alert *ngIf="showAlert" [text]="textAlert" (onClose)="closeAlert()"></app-alert>

@@ -34,6 +34,58 @@
   width:3rem;
   margin:auto;
 }
+button {
+  background: linear-gradient(90deg, rgba(142,226,107,1) 0%, rgba(0,167,99,1) 64%);
+}
+.modal{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top:0;
+  left:0;
+  background:black;
+  opacity: 0.9;
+}
+.modal-body {
+  top:30%;
+  position: relative;
+  margin:auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.img-game-over {
+  margin:auto;
+  width: 250px;
+}
+.button-game-over {
+  border: none;
+  width: 200px;
+  margin:2rem auto;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 5px;
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+  background: linear-gradient(90deg, #8ee26b 0%, #00a763 64%);
+  color: #ffffff;
+  padding: 10px 15px;
+}
+.reason {
+  font-size:2rem;
+  color:#ffff;
+  margin:2rem;
+}
+.bullets-controls {
+  position: fixed;
+  width:160px;
+  bottom: 11.2rem;
+  left: 1.2rem;
+}
+.img-bullets{
+  width: 25px;
+  transform: rotate(35deg);
+}
 .controls {
   width:160px;
   height: 160px;
@@ -45,32 +97,37 @@
   left:1rem;
   background:#ffff;
 }
-button {
-  // border:none;
+.controls button {
   width:40px;
   height:40px;
   position: absolute;
   border-radius:5px;
   background: linear-gradient(90deg, rgba(142,226,107,1) 0%, rgba(0,167,99,1) 64%);
-
 }
-.img-buttons{
+.controls .img-buttons{
   width:25px;
 }
-.button-up {
+.controls .button-up {
   top:15px;
   right:60px
 }
-.button-down {
+.controls .button-down {
   bottom:15px;
   right:60px
 }
-.button-left {
+.controls .button-left {
   bottom:60px;
   left:15px
 }
-.button-right {
+.controls .button-right {
   bottom:60px;
   right:15px
+}
+.controls .button-fire {
+  bottom:60px;
+  right:60px
+}
+.disabled {
+  background:#9f9f9f;
 }
 
