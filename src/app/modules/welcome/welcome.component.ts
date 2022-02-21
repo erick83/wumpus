@@ -28,11 +28,13 @@ export class WelcomeComponent implements OnInit {
 
   onSubmit() {
     const {dimensions, holesCant, arrowsCant} = this.parametersForm.value
-
-    if (dimensions <= holesCant) {
+    const d = parseInt(dimensions)
+    const h = parseInt(holesCant)
+    const a = parseInt(arrowsCant)
+    if (dimensions * 1 <= holesCant * 1) {
       this.textAlert = 'El tablero deben ser mayores que la cantidad de hoyos'
       this.showAlert = true
-    } else if (dimensions < 4) {
+    } else if (dimensions * 1 < 4) {
       this.textAlert = 'El tablero es muy pequeño, debe ser mayor a 4 casillas'
       this.showAlert = true
     } else {
