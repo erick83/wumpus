@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { WelcomeComponent } from './welcome.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AlertModule } from '../alert/alert.module';
 
 
 
@@ -13,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    AlertModule,
     RouterModule.forChild([
       {
         path: '',

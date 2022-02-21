@@ -15,6 +15,9 @@ export class WelcomeComponent implements OnInit {
     arrowsCant : ['', Validators.required],
   })
 
+  showAlert = false
+  textAlert = ''
+
   constructor(
     private gpService: GameParametersService,
     private fb: FormBuilder,
@@ -25,8 +28,20 @@ export class WelcomeComponent implements OnInit {
 
   onSubmit() {
     const {dimensions, holesCant, arrowsCant} = this.parametersForm.value
-    this.gpService.setParameters(dimensions, holesCant, arrowsCant)
-    this.router.navigateByUrl('game')
+
+    if (dimensions <= holesCant) {
+      this.textAlert = 'El tablero deben ser mayores que la cantidad de hoyos'
+      this.showAlert = true
+    } else if (dimensions < 4) {
+      this.textAlert = 'El tablero es muy pequeño, debe ser mayor a 4 casillas'
+      this.showAlert = true
+    } else {
+      this.gpService.setParameters(dimensions, holesCant, arrowsCant)
+      this.router.navigateByUrl('game')
+    }
   }
 
+  closeAlert() {
+    this.showAlert = false
+  }
 }

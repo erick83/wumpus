@@ -16,9 +16,7 @@
   display: flex;
   justify-content: space-between;
 }
-.game-title {
-  font-family: san-serif;
-}
+
 .label-parameters {
   font-size:1.2rem;
   font-weight: bold;
@@ -46,12 +44,11 @@ input[type=number] {
 
 .start-button {
   border: none;
-  width:100%;
-  font-size:1.2rem;
+  width: 100%;
+  font-size: 1.2rem;
   font-weight: bold;
-  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
-  font-family: sans-serif;
   border-radius: 5px;
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
   background: linear-gradient(90deg, rgba(142,226,107,1) 0%, rgba(0,167,99,1) 64%);;
   // background: linear-gradient(to right, #8ee26b 50%, #00a763 50%);
   color:#ffffff;
