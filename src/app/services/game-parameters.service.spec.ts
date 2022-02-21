@@ -25,4 +25,10 @@ describe('GameParametersService', () => {
     })
   })
 
+  it('should call board', () => {
+    service.board$.subscribe((data) => {
+      expect(data).toBeNull()
+    })
+  })
+
 });
