@@ -7,7 +7,6 @@ import { IBoxData, IParameters, TBoardCluesTypes } from '../models/models.interf
   providedIn: 'root'
 })
 export class GameParametersService {
-
   #parametersSubect = new BehaviorSubject<IParameters | null>(null)
   #boardSubject = new BehaviorSubject<IBoxData[][] | null>(null)
 
@@ -20,7 +19,7 @@ export class GameParametersService {
   }
 
   constructor() {
-    this.parameter$.subscribe(this.initParameter)
+    this.parameter$.subscribe(this.initParameter.bind(this))
   }
 
   setParameters(dimensions:number, holesCant:number, arrowsCant:number) {
