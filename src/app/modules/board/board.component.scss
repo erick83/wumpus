@@ -1,6 +1,18 @@
 .not_visited {
   background:#98da7c !important;
 }
+.right {
+  transform: rotate(90deg);
+}
+.down {
+  transform: rotate(180deg);
+}
+.left {
+  transform: rotate(270deg);
+}
+.diagonal {
+  transform: rotate(45deg);
+}
 .box-container {
   border-radius:5px;
   border: 1px solid #9f9f9f;

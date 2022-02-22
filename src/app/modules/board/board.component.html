@@ -4,7 +4,15 @@
       <!-- <p>{{ hadGold}}</p> -->
       <img class ="hunter-image" src="/assets/images/hunter.png" *ngIf="showHunter(rowIdx, colIdx)">
       <img class="gold-image" src="/assets/images/gold.png" *ngIf="col.hasGold && !col.hasPristine">
-      <img class="bullet-image" src="/assets/images/bullet.png" *ngIf="showBullet(rowIdx, colIdx) && fireActive" >
+      <img
+        class="bullet-image" src="/assets/images/bullet.png"
+        *ngIf="showBullet(rowIdx, colIdx) && fireActive"
+        [class.up]="directionBullet ==='up'"
+        [class.right]="directionBullet ==='right'"
+        [class.down]="directionBullet ==='down'"
+        [class.left]="directionBullet ==='left'"
+        [class.diagonal]="directionBullet ==='diagonal'"
+        >
       <img class="hole-image" src="/assets/images/hole.png" *ngIf="col.hasHole && !col.hasPristine">
       <img class="wumpu-image" src="/assets/images/monster.png" *ngIf="col.hasWumpu && !col.hasPristine">
       <img class="smell-image" src="/assets/images/smell.png" *ngIf="col.hasSmell  && !col.hasHole  && !col.hasWumpu  && !col.hasPristine" >

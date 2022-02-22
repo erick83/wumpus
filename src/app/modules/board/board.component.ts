@@ -26,6 +26,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   textAlert = ''
   textModal = ''
   numberBullets = 0
+  directionBullet = ''
   constructor(
     private gpService: GameParametersService,
     private router: Router
@@ -153,6 +154,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   fireBullet () {
+    this.directionBullet = 'diagonal'
     this.fireActive = !this.fireActive
   }
 
@@ -173,12 +175,16 @@ export class BoardComponent implements OnInit, OnDestroy {
     return new Promise((resolve) => {
       const interval = setInterval(() => {
         if (evt === 'up' && this.bulletPosition.row > 0) {
+          this.directionBullet = 'up'
           this.bulletPosition.row = this.bulletPosition.row - 1
         } else if (evt === 'right' &&  this.bulletPosition.col < this.maxLen - 1) {
+          this.directionBullet = 'right'
           this.bulletPosition.col =  this.bulletPosition.col + 1
         } else if (evt === 'down' && this.bulletPosition.row < this.maxLen - 1) {
+          this.directionBullet = 'down'
           this.bulletPosition.row = this.bulletPosition.row + 1
         } else if (evt === 'left' && this.bulletPosition.col > 0) {
+          this.directionBullet = 'left'
           this.bulletPosition.col = this.bulletPosition.col-1
         } else {
           resolve(interval)
