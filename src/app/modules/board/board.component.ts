@@ -176,8 +176,7 @@ export class BoardComponent implements OnInit, OnDestroy {
         if (this.board && this.board[this.bulletPosition.row] && this.board[this.bulletPosition.row][this.bulletPosition.col]) {
           let bulletActual = this.board[this.bulletPosition.row][this.bulletPosition.col]
           if (bulletActual?.hasWumpu === true) {
-            // console.log(bulletActual)
-            console.log(this.bulletPosition)
+            this.wumpuDieSound()
             this.textAlert = 'Has matado al Wumpu'
             this.showAlert = true
             this.board[this.bulletPosition.row][this.bulletPosition.col].hasWumpu = false
