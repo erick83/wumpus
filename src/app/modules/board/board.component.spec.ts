@@ -5,6 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { IBoxData, TBoardCluesTypes } from 'src/app/models/models.interfaces';
 import { GameParametersService } from 'src/app/services/game-parameters.service';
+import { AlertModule } from '../alert/alert.module';
 import { BoardComponent } from './board.component';
 
 describe('BoardComponent', () => {
@@ -20,7 +21,12 @@ describe('BoardComponent', () => {
       'GameParametersService',
       {},
       {
-        board$: of(generateBoard())
+        board$: of(generateBoard()),
+        parameter$: of({
+          dimensions: 4,
+          holesCant: 1,
+          arrowsCant: 0,
+        })
       }
     )
 
@@ -30,6 +36,7 @@ describe('BoardComponent', () => {
       ],
       imports: [
         CommonModule,
+        AlertModule,
         RouterTestingModule.withRoutes([
           {
             path: '',
@@ -51,6 +58,7 @@ describe('BoardComponent', () => {
   });
 
   it('should create', () => {
+    console.log(component)
     expect(component).toBeTruthy();
   });
 
@@ -67,6 +75,14 @@ describe('BoardComponent', () => {
 
   it('should hide hunter', () => {
     expect(component.showHunter(1, 1)).toBeFalse()
+  })
+
+  it('should show bullet', () => {
+    expect(component.showBullet(3, 0)).toBeTrue()
+  })
+
+  it('should hide bullet', () => {
+    expect(component.showBullet(1, 1)).toBeFalse()
   })
 
 

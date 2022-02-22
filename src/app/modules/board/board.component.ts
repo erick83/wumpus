@@ -43,6 +43,7 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.bulletPosition = { row: this.maxLen - 1, col: 0 }
       }
     })
+
     this.parameterSubscription = this.gpService.parameter$.subscribe(data => {
       if(data) {
         this.numberBullets = data.arrowsCant
@@ -61,6 +62,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
     return false
   }
+
   showBullet(row: number, col: number) {
     if (col === this.bulletPosition.col && row === this.bulletPosition.row) {
       return true
