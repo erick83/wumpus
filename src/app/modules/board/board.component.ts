@@ -176,6 +176,8 @@ export class BoardComponent implements OnInit, OnDestroy {
         if (this.board && this.board[this.bulletPosition.row] && this.board[this.bulletPosition.row][this.bulletPosition.col]) {
           let bulletActual = this.board[this.bulletPosition.row][this.bulletPosition.col]
           if (bulletActual?.hasWumpu === true) {
+            // console.log(bulletActual)
+            console.log(this.bulletPosition)
             this.textAlert = 'Has matado al Wumpu'
             this.showAlert = true
             this.board[this.bulletPosition.row][this.bulletPosition.col].hasWumpu = false
@@ -189,11 +191,11 @@ export class BoardComponent implements OnInit, OnDestroy {
             if(this.board && this.board[this.bulletPosition.row+1] && this.board[this.bulletPosition.row+1][this.bulletPosition.col]){
               this.board[this.bulletPosition.row+1][this.bulletPosition.col].hasSmell = false
             }
-            if (this.board && this.board[this.bulletPosition.row][this.bulletPosition.col+1]) {
+            if (this.board && this.board[this.bulletPosition.row] && this.board[this.bulletPosition.row][this.bulletPosition.col+1]) {
               this.board[this.bulletPosition.row][this.bulletPosition.col+1].hasSmell = false
             }
-            if (this.board && this.board[this.bulletPosition.row][this.bulletPosition.col+1]) {
-              this.board[this.bulletPosition.row][this.bulletPosition.col+1].hasSmell = false
+            if (this.board && this.board[this.bulletPosition.row] && this.board[this.bulletPosition.row][this.bulletPosition.col-1]) {
+              this.board[this.bulletPosition.row][this.bulletPosition.col-1].hasSmell = false
             }
           }
         }
