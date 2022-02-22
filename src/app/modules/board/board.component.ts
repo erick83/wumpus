@@ -37,6 +37,7 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.router.navigateByUrl('')
       } else {
         this.board = [...data].reverse()
+        this.board[3][0].hasPristine = false
         this.maxLen = data?.length || 0
         this.hunterPosition = { row: this.maxLen - 1, col: 0 }
         this.bulletPosition = { row: this.maxLen - 1, col: 0 }
