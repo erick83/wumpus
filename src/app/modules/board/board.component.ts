@@ -12,6 +12,7 @@ import { GameParametersService } from 'src/app/services/game-parameters.service'
 export class BoardComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription()
   hunterPosition: IUserPosition = {col: 0, row: 0 }
+  bulletPosition: IUserPosition = {col: 0, row:0}
 
   board: IBoxData[][] | null = null
   maxLen = 0
@@ -141,6 +142,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   fireBulletDirection(evt:string){
+    this.numberBullets = this.numberBullets -1
     this.intervalBullet(evt).then((interval) => {
       clearInterval(interval)
       console.log(' LLego a la pared ')
@@ -164,16 +166,17 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   private intervalBullet(evt:string): Promise<any> {
     let counter = 0
+    this.bulletPosition = this.hunterPosition
     return new Promise((resolve) => {
       const interval = setInterval(() => {
         if (evt === 'up' && this.hunterPosition.row > 0) {
-          this.hunterPosition.row = this.hunterPosition.row - 1
-        } else if (evt === 'right' &&  this.hunterPosition.col < this.maxLen - 1) {
-          this.hunterPosition.col =  this.hunterPosition.col + 1
-        } else if (evt === 'down' && this.hunterPosition.row < this.maxLen - 1) {
-          this.hunterPosition.row = this.hunterPosition.row + 1
-        } else if (evt === 'left' && this.hunterPosition.col > 0) {
-          this.hunterPosition.col = this.hunterPosition.col-1
+          this.bulletPosition.row = this.bulletPosition.row - 1
+        } else if (evt === 'right' &&  this.bulletPosition.col < this.maxLen - 1) {
+          this.bulletPosition.col =  this.bulletPosition.col + 1
+        } else if (evt === 'down' && this.bulletPosition.row < this.maxLen - 1) {
+          this.bulletPosition.row = this.bulletPosition.row + 1
+        } else if (evt === 'left' && this.bulletPosition.col > 0) {
+          this.bulletPosition.col = this.bulletPosition.col-1
         } else {
           resolve(interval)
         }
