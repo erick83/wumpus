@@ -111,14 +111,12 @@ export class BoardComponent implements OnInit, OnDestroy {
       positionActual.hasPristine = false
 
       if (this.hunterPosition.row === this.maxLen - 1 && this.hunterPosition.col === 0 && this.hadGold){
+        this.victorySound()
         this.textModal = 'Has ganado el juego'
         this.youWin = true
         this.showModal = true
       }
-      // if (positionActual?.hasWind === true && positionActual?.hasSmell === true) {
-      //   this.textAlert = 'Se percibe hedor y brisa'
-      //   this.showAlert = true
-      // }
+
       if (positionActual?.hasWind === true) {
         this.textAlert += ' Se percibe brisa -'
         this.showAlert = true
@@ -174,7 +172,6 @@ export class BoardComponent implements OnInit, OnDestroy {
   closeAlert() {
     this.showAlert = false
     if (this.gameOver || this.youWin) {
-      this.victorySound()
       this.router.navigateByUrl('/')
     }
   }
