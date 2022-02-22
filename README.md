@@ -27,4 +27,4 @@ una vez se hayan instalados todas las dependicas iniciamos el servidor con el si
   ```
 Ahora ve a la siguiente URL para ver el proyecto
 
-![Vista inicio hunt the wumpus](/assets/images/test.png)
+![Vista inicio hunt the wumpus](/src/assets/images/test.png)
