@@ -42,6 +42,7 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.maxLen = data?.length || 0
         this.hunterPosition = { row: this.maxLen - 1, col: 0 }
         this.bulletPosition = { row: this.maxLen - 1, col: 0 }
+        this.board[this.hunterPosition.row][this.hunterPosition.col].hasPristine = false
       }
     })
 
