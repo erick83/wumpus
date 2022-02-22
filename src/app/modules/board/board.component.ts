@@ -74,41 +74,17 @@ export class BoardComponent implements OnInit, OnDestroy {
       }
     }
 
-    switch (evt) {
-      case 'up':
-        if(this.hunterPosition.row > 0){
-          this.hunterPosition.row = this.hunterPosition.row-1
-        } else {
-          this.textAlert = 'Has chocado con una pared'
-          this.showAlert = true
-        }
-      break;
-      case 'right':
-        if(this.hunterPosition.col < this.maxLen - 1){
-          this.hunterPosition.col = this.hunterPosition.col+1
-        } else {
-          this.textAlert = 'Has chocado con una pared'
-          this.showAlert = true
-        }
-          break;
-      case 'down':
-        if(this.hunterPosition.row < this.maxLen - 1){
-          this.hunterPosition.row = this.hunterPosition.row+1
-        } else {
-          this.textAlert = 'Has chocado con una pared'
-          this.showAlert = true
-        }
-        break;
-      case 'left':
-        if(this.hunterPosition.col > 0){
-          this.hunterPosition.col = this.hunterPosition.col-1
-        } else {
-          this.textAlert = 'Has chocado con una pared'
-          this.showAlert = true
-        }
-        break;
-      default:
-        break;
+    if (evt === 'up' && this.hunterPosition.row > 0) {
+      this.hunterPosition.row = this.hunterPosition.row - 1
+    } else if (evt === 'right' &&  this.hunterPosition.col < this.maxLen - 1) {
+      this.hunterPosition.col =  this.hunterPosition.col + 1
+    } else if (evt === 'down' && this.hunterPosition.row < this.maxLen - 1) {
+      this.hunterPosition.row = this.hunterPosition.row + 1
+    } else if (evt === 'left' && this.hunterPosition.col > 0) {
+      this.hunterPosition.col = this.hunterPosition.col-1
+    } else {
+      this.textAlert = 'Has chocado con una pared'
+      this.showAlert = true
     }
 
     let positionActual = null
