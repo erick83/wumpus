@@ -26,5 +26,5 @@ una vez se hayan instalados todas las dependicas iniciamos el servidor con el si
   http://127.0.0.1:4200/
   ```
 Ahora ve a la siguiente URL para ver el proyecto
- ![Vista inicio hunt the wumpus](/assets/images/test.png)
 
+![Vista inicio hunt the wumpus](/assets/images/test.png)
