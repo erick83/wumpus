@@ -1,13 +1,27 @@
 # Hunt The Wumpus
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.16.
+Este proyecto fue desarrollado en  [Angular CLI](https://github.com/angular/angular-cli) version 12.2.16.
 
-## Development server
+## Clona el proyecto
+  ```
+  git clone https://github.com/erick83/hunt-the-wumpus.git
+  ```
+ve a la carpeta donde quieras almacenar el proyecto y ejecuta este comando para descargar el proyecto
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Instalar Dependencias
 
-## Code scaffolding
+  ```
+  npm install
+  ```
+ahora accede dentro de la carpeta ya clonado y ejecuta este comando para instalar las dependencias necesarias
 
+## Iniciar Servidor
+  ```
+  npm start
+  ```
+una vez se hayan instalados todas las dependicas iniciamos el servidor con el siguiente comando 
+
+ve a la carpeta donde quieras almacenar el proyecto y ejecuta este comando para descargar el proyecto
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
