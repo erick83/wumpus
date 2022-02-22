@@ -75,10 +75,10 @@
       class="img-game-over"
       *ngIf="youWin"
       src="/assets/images/youWin.png">
-      <h6 class="reason">{{textModal}}</h6>
+      <h6 class="reason">{{removeTrailingCharacter(textModal)}}</h6>
       <button
         class="button-game-over"
         (click)="goToNewGame()">Nuevo Juego</button>
   </div>
 </div>
-<app-alert *ngIf="showAlert" [text]="textAlert" (onClose)="closeAlert()"></app-alert>
+<app-alert *ngIf="showAlert" [text]="removeTrailingCharacter(textAlert)" (onClose)="closeAlert()"></app-alert>

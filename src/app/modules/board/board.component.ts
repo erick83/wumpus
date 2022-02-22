@@ -81,7 +81,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   moveHunter(evt:string) {
     this.showAlert = false
-
+    this.textAlert = ''
     if (this.hadGold
         && this.board
         && this.board[this.hunterPosition.row]
@@ -115,16 +115,27 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.youWin = true
         this.showModal = true
       }
-
+      // if (positionActual?.hasWind === true && positionActual?.hasSmell === true) {
+      //   this.textAlert = 'Se percibe hedor y brisa'
+      //   this.showAlert = true
+      // }
+      if (positionActual?.hasWind === true) {
+        this.textAlert += ' Se percibe brisa -'
+        this.showAlert = true
+      }
+      if (positionActual?.hasSmell === true) {
+        this.textAlert += ' Se percibe hedor -'
+        this.showAlert = true
+      }
       if (positionActual?.hasHole === true) {
-        this.textModal = 'Has caido en un pozo'
+        this.textModal = ' Has caido en un pozo -'
         this.showModal = true
         this.gameOver = true
         this.holeSound()
       }
 
       if (positionActual?.hasWumpu === true) {
-        this.textModal = 'Has sido victima del Wumpu'
+        this.textModal = ' Has sido victima del Wumpu'
         this.showModal = true
         this.gameOver = true
         this.monsterSound()
@@ -132,7 +143,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
       if (positionActual?.hasGold === true) {
           this.hadGold = positionActual.hasGold = true
-          this.textAlert = 'Has capturado el oro'
+          this.textAlert += ' Has capturado el oro'
           this.showAlert = true
       }
 
@@ -141,7 +152,9 @@ export class BoardComponent implements OnInit, OnDestroy {
       }
     }
   }
-
+  removeTrailingCharacter(text:string) {
+    return text.replace(/-$/g,'')
+  }
   fireBulletDirection(evt:string){
     if (this.numberBullets > 0) {
       this.intervalBullet(evt).then((interval) => {
