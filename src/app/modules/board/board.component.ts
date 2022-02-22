@@ -10,7 +10,8 @@ import { GameParametersService } from 'src/app/services/game-parameters.service'
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit, OnDestroy {
-  private subscription: Subscription = new Subscription()
+  private boardSubscription: Subscription = new Subscription()
+  private parameterSubscription: Subscription = new Subscription()
   hunterPosition: IUserPosition = {col: 0, row: 0 }
   bulletPosition: IUserPosition = {col: 0, row:0}
 
@@ -31,7 +32,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.subscription = this.gpService.board$.subscribe(data => {
+    this.boardSubscription = this.gpService.board$.subscribe(data => {
       if (!data) {
         this.router.navigateByUrl('')
       } else {
@@ -40,7 +41,7 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.hunterPosition = { row: this.maxLen - 1, col: 0 }
       }
     })
-    this.gpService.parameter$.subscribe(data => {
+    this.parameterSubscription = this.gpService.parameter$.subscribe(data => {
       if(data) {
         this.numberBullets = data.arrowsCant
       }
@@ -48,7 +49,8 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe()
+    this.boardSubscription.unsubscribe()
+    this.parameterSubscription.unsubscribe()
   }
 
   showHunter(row: number, col: number) {
