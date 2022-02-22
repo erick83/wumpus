@@ -98,7 +98,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       this.showAlert = true
       this.hitSound()
     }
-
+    this.bulletPosition = {...this.hunterPosition}
     let positionActual = null
     if (this.board && this.board[this.hunterPosition.row] && this.board[this.hunterPosition.row][this.hunterPosition.col]) {
       positionActual = this.board[this.hunterPosition.row][this.hunterPosition.col]
@@ -172,6 +172,30 @@ export class BoardComponent implements OnInit, OnDestroy {
           this.bulletPosition.col = this.bulletPosition.col-1
         } else {
           resolve(interval)
+        }
+        if (this.board && this.board[this.bulletPosition.row] && this.board[this.bulletPosition.row][this.bulletPosition.col]) {
+          let bulletActual = this.board[this.bulletPosition.row][this.bulletPosition.col]
+          if (bulletActual?.hasWumpu === true) {
+            this.textAlert = 'Has matado al Wumpu'
+            this.showAlert = true
+            this.board[this.bulletPosition.row][this.bulletPosition.col].hasWumpu = false
+            //ELIMINAR HEDOR
+            if (this.board && this.board[this.bulletPosition.row] && this.board[this.bulletPosition.row][this.bulletPosition.col]) {
+              this.board[this.bulletPosition.row][this.bulletPosition.col].hasSmell = false
+            }
+            if (this.board && this.board[this.bulletPosition.row-1] && this.board[this.bulletPosition.row-1][this.bulletPosition.col]) {
+              this.board[this.bulletPosition.row-1][this.bulletPosition.col].hasSmell = false
+            }
+            if(this.board && this.board[this.bulletPosition.row+1] && this.board[this.bulletPosition.row+1][this.bulletPosition.col]){
+              this.board[this.bulletPosition.row+1][this.bulletPosition.col].hasSmell = false
+            }
+            if (this.board && this.board[this.bulletPosition.row][this.bulletPosition.col+1]) {
+              this.board[this.bulletPosition.row][this.bulletPosition.col+1].hasSmell = false
+            }
+            if (this.board && this.board[this.bulletPosition.row][this.bulletPosition.col+1]) {
+              this.board[this.bulletPosition.row][this.bulletPosition.col+1].hasSmell = false
+            }
+          }
         }
       }, 200)
     })

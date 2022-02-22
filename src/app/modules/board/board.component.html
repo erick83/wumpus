@@ -1,6 +1,6 @@
 <div class="box-container">
   <div *ngFor="let row of board; index as rowIdx;" class="row">
-    <div class="col" *ngFor="let col of row ; index as colIdx">
+    <div class="col" *ngFor="let col of row ; index as colIdx"[class.not_visited]="col.hasPristine">
       <!-- <p>{{ hadGold}}</p> -->
       <img class ="hunter-image" src="/assets/images/hunter.png" *ngIf="showHunter(rowIdx, colIdx)">
       <img class="gold-image" src="/assets/images/gold.png" *ngIf="col.hasGold && !col.hasPristine">
