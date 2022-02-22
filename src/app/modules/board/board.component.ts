@@ -51,7 +51,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe()
   }
 
-  showHunter(row:number, col:number ) {
+  showHunter(row: number, col: number) {
     if (col === this.hunterPosition.col && row === this.hunterPosition.row) {
       return true
     }
@@ -73,6 +73,7 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.board[this.hunterPosition.row][this.hunterPosition.col].hasGold = false
       }
     }
+
     switch (evt) {
       case 'up':
         if(this.hunterPosition.row > 0){
@@ -97,7 +98,7 @@ export class BoardComponent implements OnInit, OnDestroy {
           this.textAlert = 'Has chocado con una pared'
           this.showAlert = true
         }
-      break;
+        break;
       case 'left':
         if(this.hunterPosition.col > 0){
           this.hunterPosition.col = this.hunterPosition.col-1
@@ -105,12 +106,13 @@ export class BoardComponent implements OnInit, OnDestroy {
           this.textAlert = 'Has chocado con una pared'
           this.showAlert = true
         }
-      break;
-    default:
-      break;
-   }
-   let positionActual = null
-   if (this.board && this.board[this.hunterPosition.row] && this.board[this.hunterPosition.row][this.hunterPosition.col]) {
+        break;
+      default:
+        break;
+    }
+
+    let positionActual = null
+    if (this.board && this.board[this.hunterPosition.row] && this.board[this.hunterPosition.row][this.hunterPosition.col]) {
       positionActual = this.board[this.hunterPosition.row][this.hunterPosition.col]
       positionActual.hasPristine = false
       if (this.hunterPosition.row === this.maxLen - 1 && this.hunterPosition.col === 0 && this.hadGold){
