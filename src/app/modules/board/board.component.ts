@@ -39,6 +39,7 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.board = [...data].reverse()
         this.maxLen = data?.length || 0
         this.hunterPosition = { row: this.maxLen - 1, col: 0 }
+        this.bulletPosition = { row: this.maxLen - 1, col: 0 }
       }
     })
     this.parameterSubscription = this.gpService.parameter$.subscribe(data => {
@@ -55,6 +56,12 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   showHunter(row: number, col: number) {
     if (col === this.hunterPosition.col && row === this.hunterPosition.row) {
+      return true
+    }
+    return false
+  }
+  showBullet(row: number, col: number) {
+    if (col === this.bulletPosition.col && row === this.bulletPosition.row) {
       return true
     }
     return false
@@ -121,11 +128,14 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   fireBulletDirection(evt:string){
+    if (this.numberBullets > 0) {
+      this.intervalBullet(evt).then((interval) => {
+        clearInterval(interval)
+        this.fireActive = false
+        this.bulletPosition = {...this.hunterPosition}
+      })
+    }
     this.numberBullets = this.numberBullets -1
-    this.intervalBullet(evt).then((interval) => {
-      clearInterval(interval)
-      console.log(' LLego a la pared ')
-    })
   }
 
   fireBullet () {
@@ -144,11 +154,10 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   private intervalBullet(evt:string): Promise<any> {
-    let counter = 0
-    this.bulletPosition = this.hunterPosition
+    this.bulletPosition = {...this.hunterPosition}
     return new Promise((resolve) => {
       const interval = setInterval(() => {
-        if (evt === 'up' && this.hunterPosition.row > 0) {
+        if (evt === 'up' && this.bulletPosition.row > 0) {
           this.bulletPosition.row = this.bulletPosition.row - 1
         } else if (evt === 'right' &&  this.bulletPosition.col < this.maxLen - 1) {
           this.bulletPosition.col =  this.bulletPosition.col + 1
@@ -159,10 +168,7 @@ export class BoardComponent implements OnInit, OnDestroy {
         } else {
           resolve(interval)
         }
-
-        console.log(counter)
-        console.log(this.hunterPosition);
-      }, 1000)
+      }, 200)
     })
   }
 }
