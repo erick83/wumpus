@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IBoxData, IUserPosition } from 'src/app/models/models.interfaces';
 import { GameParametersService } from 'src/app/services/game-parameters.service';
+import { setInterval } from 'timers';
 
 @Component({
   selector: 'app-board',
@@ -20,6 +21,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   showAlert = false
   showModal = false
   youWin = false
+  fireActive = false
   textAlert = ''
   textModal = ''
   numberBullets = 0
@@ -54,6 +56,14 @@ export class BoardComponent implements OnInit, OnDestroy {
       return true
     }
     return false
+  }
+
+  clickArrow (evt:string ='') {
+    if (this.fireActive) {
+      this.fireBulletDirection(evt)
+    } else {
+      this.moveHunter(evt)
+    }
   }
 
   moveHunter(evt:string) {
@@ -103,7 +113,6 @@ export class BoardComponent implements OnInit, OnDestroy {
    if (this.board && this.board[this.hunterPosition.row] && this.board[this.hunterPosition.row][this.hunterPosition.col]) {
       positionActual = this.board[this.hunterPosition.row][this.hunterPosition.col]
       positionActual.hasPristine = false
-      console.log(this.hunterPosition, positionActual.hasGold)
       if (this.hunterPosition.row === this.maxLen - 1 && this.hunterPosition.col === 0 && this.hadGold){
         this.textModal = 'Has ganado el juego'
         this.youWin = true
@@ -129,6 +138,17 @@ export class BoardComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+  fireBulletDirection(evt:string){
+    this.intervalBullet(evt).then((interval) => {
+      console.log(interval)
+    })
+  }
+
+  fireBullet () {
+    this.fireActive = !this.fireActive
+  }
+
   closeAlert() {
     this.showAlert = false
     if (this.gameOver || this.youWin) {
@@ -139,5 +159,48 @@ export class BoardComponent implements OnInit, OnDestroy {
   goToNewGame() {
     this.router.navigateByUrl('')
   }
-
+  private intervalBullet(evt:string): Promise<NodeJS.Timeout> {
+    return new Promise((resolve) => {
+      const interval = setInterval(() => {
+      //   // switch (evt) {
+      //   //   case 'up':
+      //   //     if(this.hunterPosition.row > 0){
+      //   //       this.hunterPosition.row =  this.hunterPosition.row - 1
+      //   //     } else {
+      //   //       resolve(interval)
+      //   //     }
+      //   //   break;
+      //   //   case 'right':
+      //   //     if(this.hunterPosition.col < this.maxLen - 1){
+      //   //       this.hunterPosition.col =  this.hunterPosition.col - 1
+      //   //     } else {
+      //   //       resolve(interval)
+      //   //     }
+      //   //     break;
+      //   //   case 'down':
+      //   //     if(this.hunterPosition.row < this.maxLen - 1){
+      //   //       this.hunterPosition.row = this.hunterPosition.row + 1
+      //   //     } else {
+      //   //       resolve(interval)
+      //   //     }
+      //   //   break;
+      //   //   case 'left':
+      //   //     if(this.hunterPosition.col > 0){
+      //   //       this.hunterPosition.col = this.hunterPosition.col-1
+      //   //     } else {
+      //   //       resolve(interval)
+      //   //     }
+      //   //   break;
+      //   //   default:
+      //   //   break;
+      //   // }
+      //   console.log('hola')
+      let counter = 0
+      console.log('ALO')
+      if (counter === 5) {
+        resolve(interval)
+      }
+      }, 1000)
+    })
+  }
 }
