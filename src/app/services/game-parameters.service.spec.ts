@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { GameParametersService } from './game-parameters.service';
 
 describe('GameParametersService', () => {
