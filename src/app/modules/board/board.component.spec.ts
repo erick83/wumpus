@@ -14,8 +14,6 @@ describe('BoardComponent', () => {
   let fakeGameService: GameParametersService
   const board: IBoxData[][] = []
 
-  console.log(generateBoard())
-
   beforeEach(async () => {
     fakeGameService = jasmine.createSpyObj<GameParametersService>(
       'GameParametersService',
@@ -58,7 +56,6 @@ describe('BoardComponent', () => {
   });
 
   it('should create', () => {
-    console.log(component)
     expect(component).toBeTruthy();
   });
 
@@ -98,8 +95,119 @@ describe('BoardComponent', () => {
 
     expect(component.hunterPosition.row).toBe(prevHunterPosition - 1)
   })
-});
 
+  it('shoul move hunter down', () => {
+    component.hunterPosition = {
+      col: 0,
+      row: 2,
+    }
+
+    const prevHunterPosition = component.hunterPosition.row
+    const button = fixture.debugElement.query(By.css('.button-down'))
+    button.nativeElement.click()
+
+    expect(component.hunterPosition.row).toBe(prevHunterPosition + 1)
+  })
+
+  it('shoul move hunter right', () => {
+    component.hunterPosition = {
+      col: 0,
+      row: 2,
+    }
+
+    const prevHunterPosition = component.hunterPosition.col
+    const button = fixture.debugElement.query(By.css('.button-right'))
+    button.nativeElement.click()
+
+    expect(component.hunterPosition.col).toBe(prevHunterPosition + 1)
+  })
+
+  it('shoul move hunter left', () => {
+    component.hunterPosition = {
+      col: 2,
+      row: 2,
+    }
+
+    const prevHunterPosition = component.hunterPosition.col
+    const button = fixture.debugElement.query(By.css('.button-left'))
+    button.nativeElement.click()
+
+    expect(component.hunterPosition.col).toBe(prevHunterPosition - 1)
+  })
+
+  it('shoul move hunter to wall', () => {
+    component.hunterPosition = {
+      col: 0,
+      row: 3,
+    }
+
+    const prevHunterPosition = component.hunterPosition.col
+    const button = fixture.debugElement.query(By.css('.button-left'))
+    button.nativeElement.click()
+
+    expect(component.showAlert).toBeTrue()
+    expect(component.textAlert).toBe('Has chocado con una pared')
+  })
+
+  // it('shoul move hunter fall', () => {
+  //   component.hunterPosition = {
+  //     row: 1,
+  //     col: 2,
+  //   }
+
+  //   const method = spyOn(component, 'moveHunter')
+
+  //   const button = fixture.debugElement.query(By.css('.button-right'))
+  //   button.nativeElement.click()
+
+  //   expect(method).toHaveBeenCalled()
+  //   console.log(component)
+  //   expect(component.showAlert).toBeTrue()
+  //   expect(component.gameOver).toBeTrue()
+  //   expect(component.textAlert).toBe('Has caido en un pozo')
+  // })
+
+  it('should fireBullet', () => {
+    const active = component.fireActive
+    component.fireBullet()
+    expect(component.fireActive).toBe(!active)
+  })
+
+  it('should end the game', () => {
+    component.gameOver = true
+    const method = spyOn(component, 'victorySound')
+    component.closeAlert()
+    expect(method).toHaveBeenCalled()
+  })
+
+  it('should fire bullet', () => {
+    const bullets = component.numberBullets = 5
+    component.fireBulletDirection('up')
+    expect(component.numberBullets).toBe(bullets - 1)
+  })
+
+  it('should call intervalBullet up', async () => {
+    const dataUp = await component.intervalBullet('up')
+    expect(dataUp).not.toBeNull()
+  })
+
+  it('should call intervalBullet right', async () => {
+    component.bulletPosition.col = 2
+    const dataRight = await component.intervalBullet('right')
+    expect(dataRight).not.toBeNull()
+  })
+
+  it('should call intervalBullet left', async () => {
+    component.bulletPosition.col = 2
+    const dataLeft = await component.intervalBullet('left')
+    expect(dataLeft).not.toBeNull()
+  })
+  it('should call intervalBullet down', async () => {
+    component.bulletPosition.row = 5
+    const dataDown = await component.intervalBullet('down')
+    expect(dataDown).not.toBeNull()
+  })
+});
 
 
 function generateBoard() {

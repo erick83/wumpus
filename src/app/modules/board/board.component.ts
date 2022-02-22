@@ -80,6 +80,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   moveHunter(evt:string) {
     this.showAlert = false
+
     if (this.hadGold
         && this.board
         && this.board[this.hunterPosition.row]
@@ -100,33 +101,40 @@ export class BoardComponent implements OnInit, OnDestroy {
       this.showAlert = true
       this.hitSound()
     }
+
     this.bulletPosition = {...this.hunterPosition}
     let positionActual = null
+
     if (this.board && this.board[this.hunterPosition.row] && this.board[this.hunterPosition.row][this.hunterPosition.col]) {
       positionActual = this.board[this.hunterPosition.row][this.hunterPosition.col]
       positionActual.hasPristine = false
+
       if (this.hunterPosition.row === this.maxLen - 1 && this.hunterPosition.col === 0 && this.hadGold){
         this.textModal = 'Has ganado el juego'
         this.youWin = true
         this.showModal = true
       }
+
       if (positionActual?.hasHole === true) {
         this.textModal = 'Has caido en un pozo'
         this.showModal = true
         this.gameOver = true
         this.holeSound()
       }
+
       if (positionActual?.hasWumpu === true) {
         this.textModal = 'Has sido victima del Wumpu'
         this.showModal = true
         this.gameOver = true
         this.monsterSound()
       }
+
       if (positionActual?.hasGold === true) {
           this.hadGold = positionActual.hasGold = true
           this.textAlert = 'Has capturado el oro'
           this.showAlert = true
       }
+
       if (this.hadGold && positionActual.hasPristine === false) {
         positionActual.hasGold = true
       }
@@ -160,7 +168,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('')
   }
 
-  private intervalBullet(evt:string): Promise<any> {
+  intervalBullet(evt:string): Promise<any> {
     this.bulletPosition = {...this.hunterPosition}
     return new Promise((resolve) => {
       const interval = setInterval(() => {
@@ -204,35 +212,35 @@ export class BoardComponent implements OnInit, OnDestroy {
     })
   }
 
-  private holeSound() {
+  holeSound() {
     const sound = new Audio()
     sound.src = 'assets/sounds/falling.wav'
     sound.load()
     sound.play()
   }
 
-  private monsterSound() {
+  monsterSound() {
     const sound = new Audio()
     sound.src = 'assets/sounds/monster.wav'
     sound.load()
     sound.play()
   }
 
-  private wumpuDieSound() {
+  wumpuDieSound() {
     const sound = new Audio()
     sound.src = 'assets/sounds/wumpu-die.wav'
     sound.load()
     sound.play()
   }
 
-  private victorySound() {
+  victorySound() {
     const sound = new Audio()
     sound.src = 'assets/sounds/victory.wav'
     sound.load()
     sound.play()
   }
 
-  private hitSound() {
+  hitSound() {
     const sound = new Audio()
     sound.src = 'assets/sounds/hit.wav'
     sound.load()
