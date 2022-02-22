@@ -68,10 +68,11 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   moveHunter(evt:string) {
     this.showAlert = false
-    if (this.hadGold) {
-      if (this.board && this.board[this.hunterPosition.row] && this.board[this.hunterPosition.row][this.hunterPosition.col]) {
-        this.board[this.hunterPosition.row][this.hunterPosition.col].hasGold = false
-      }
+    if (this.hadGold
+        && this.board
+        && this.board[this.hunterPosition.row]
+        && this.board[this.hunterPosition.row][this.hunterPosition.col]) {
+      this.board[this.hunterPosition.row][this.hunterPosition.col].hasGold = false
     }
 
     if (evt === 'up' && this.hunterPosition.row > 0) {
