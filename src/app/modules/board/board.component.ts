@@ -96,6 +96,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     } else {
       this.textAlert = 'Has chocado con una pared'
       this.showAlert = true
+      this.hitSound()
     }
 
     let positionActual = null
@@ -148,6 +149,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   closeAlert() {
     this.showAlert = false
     if (this.gameOver || this.youWin) {
+      this.victorySound()
       this.router.navigateByUrl('/')
     }
   }
@@ -185,6 +187,27 @@ export class BoardComponent implements OnInit, OnDestroy {
   private monsterSound() {
     const sound = new Audio()
     sound.src = 'assets/sounds/monster.wav'
+    sound.load()
+    sound.play()
+  }
+
+  private wumpuDieSound() {
+    const sound = new Audio()
+    sound.src = 'assets/sounds/wumpu-die.wav'
+    sound.load()
+    sound.play()
+  }
+
+  private victorySound() {
+    const sound = new Audio()
+    sound.src = 'assets/sounds/victory.wav'
+    sound.load()
+    sound.play()
+  }
+
+  private hitSound() {
+    const sound = new Audio()
+    sound.src = 'assets/sounds/hit.wav'
     sound.load()
     sound.play()
   }
