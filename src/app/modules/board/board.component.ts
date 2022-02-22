@@ -110,11 +110,13 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.textModal = 'Has caido en un pozo'
         this.showModal = true
         this.gameOver = true
+        this.holeSound()
       }
       if (positionActual?.hasWumpu === true) {
         this.textModal = 'Has sido victima del Wumpu'
         this.showModal = true
         this.gameOver = true
+        this.monsterSound()
       }
       if (positionActual?.hasGold === true) {
           this.hadGold = positionActual.hasGold = true
@@ -170,5 +172,19 @@ export class BoardComponent implements OnInit, OnDestroy {
         }
       }, 200)
     })
+  }
+
+  private holeSound() {
+    const sound = new Audio()
+    sound.src = 'assets/sounds/falling.wav'
+    sound.load()
+    sound.play()
+  }
+
+  private monsterSound() {
+    const sound = new Audio()
+    sound.src = 'assets/sounds/monster.wav'
+    sound.load()
+    sound.play()
   }
 }
